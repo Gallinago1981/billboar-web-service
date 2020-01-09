@@ -51,8 +51,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
+          keys:
+            - v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
       - run:
         name: Document Generate SwaggerUI
         command: ./gradlew :billboard-api:generateSwaggerUI
@@ -61,7 +61,7 @@ jobs:
         destination: swagger-ui-billboard
       - save_cache:
         paths: ~/.gradle
-        keys: v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
+        key: v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
   api:
     machine:
       image: circleci/openjdk:8-jdk
@@ -80,7 +80,7 @@ jobs:
         command: ./gradlew :billboard-api:build
       - save_cache:
         paths: ~/.gradle
-        keys: v1-build-{{ checksum "billboard-api/build.gradle" }}
+        key: v1-build-{{ checksum "billboard-api/build.gradle" }}
 workflows:
   version: 2
   workflow:
