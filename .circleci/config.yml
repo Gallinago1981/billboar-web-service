@@ -74,13 +74,13 @@ jobs:
       - checkout
       - restore_cache:
         keys:
-          - v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
+          - v1-build-{{ checksum "billboard-api/build.gradle" }}
       - run:
         name: billboard api service build
         command: ./gradlew :billboard-api:build
       - save_cache:
         paths: ~/.gradle
-        keys: v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
+        keys: v1-build-{{ checksum "billboard-api/build.gradle" }}
 workflows:
   version: 2
   workflow:
