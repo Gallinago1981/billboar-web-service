@@ -85,7 +85,5 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - gen-swagger-ui:
-        context: application-global
-      - api:
-        context: application-global
+      - gen-swagger-ui
+      - api
