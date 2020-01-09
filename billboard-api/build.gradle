@@ -13,6 +13,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id "org.openapi.generator" version "4.2.2"
+    id 'org.hidetake.swagger.generator' version '2.18.1'
 }
 
 group = 'exsample.kotlin'
@@ -52,6 +53,8 @@ dependencies {
     testImplementation("com.ninja-squad:DbSetup:2.1.0")
     testImplementation("org.dbunit:dbunit:2.6.0")
     testImplementation("org.assertj:assertj-db:1.2.0")
+    // for Swagger UI Generate
+    swaggerUI 'org.webjars:swagger-ui:3.10.0'
 }
 
 test {
@@ -76,6 +79,13 @@ openApiGenerate {
             models: ""
     ]
 }
+
+swaggerSources {
+    billboard {
+        inputFile = file('specs/billboard.yml')
+    }
+}
+
 compileKotlin {
     dependsOn {
         tasks.openApiGenerate
