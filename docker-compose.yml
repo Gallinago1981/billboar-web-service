@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+    db:
+        image: mysql:8.0.18
+        volumes: 
+            - ./initdb.d:/docker-entrypoint-initdb.d
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=billboard
+        ports:
+            - 13306:3306
+    adminer:
+        image: adminer
+        ports:
+            - 10080:8080
+        depends_on:
+            - db

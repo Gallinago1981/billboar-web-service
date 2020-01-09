@@ -1,0 +1,5 @@
+rootProject.name = 'billboard-web-service'
+
+include "billboard-api"
+include "doma-gen"
+

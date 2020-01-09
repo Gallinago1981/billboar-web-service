@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+}
+
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+configurations {
+    domaGenRuntime
+}
+repositories {
+    mavenCentral()
+    // for doma-gen2
+    maven {url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+}
+
+dependencies {
+    implementation("commons-beanutils:commons-beanutils:1.9.3")
+    runtime('mysql:mysql-connector-java:8.0.18')
+    // for doma-gen2 custom template
+    implementation("org.seasar.doma:doma-gen:2.26.0")
+    domaGenRuntime("org.seasar.doma:doma-gen:2.26.0")
+    domaGenRuntime("mysql:mysql-connector-java:8.0.18")
+    domaGenRuntime("commons-beanutils:commons-beanutils:1.9.3")
+    domaGenRuntime('org.freemarker:freemarker:2.3.28')
+}
+task domaGen {
+    group = "doma"
+    doFirst {
+        delete 'out'
+    }
+    doLast {
+        ant.taskdef(resource: 'domagentask.properties',
+                classpath: configurations.domaGenRuntime.asPath + ':' + 'build/classes/java/main')
+        ant.gen(
+                url: 'jdbc:mysql://127.0.0.1:13306/billboard',
+                user: 'root',
+                password: 'root',
+                driverClassName: 'com.mysql.cj.jdbc.Driver',
+                tableNamePattern: 'thread.*',
+                templatePrimaryDir: 'templates',
+                globalFactoryClassName: 'exsample.doma.codegen.CustomGlobalFactory'
+        ) {
+            entityConfig(
+                packageName: 'exsample.kotlin.billboard.repository.entity',
+                destDir: 'out',
+                useListener: false,
+                entitySuffix: 'Entity'
+            )
+        }
+        copy {
+            from('out/exsample/kotlin/billboard/repository/entity')
+            into('out/exsample/kotlin/billboard/repository/entity')
+            include('*.java')
+            rename { it.replace(".java", ".kt")}
+        }
+        delete fileTree('out/exsample/kotlin/billboard/repository/entity'){
+            include '*.java'
+        }
+
+    }
+}
