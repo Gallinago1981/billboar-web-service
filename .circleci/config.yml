@@ -41,7 +41,7 @@ jobs:
 #      # run tests!
 #      #- run: gradle test
   gen-swagger-ui:
-    machine:
+    docker:
       image: circleci/openjdk:8-jdk
     working_directory: ~/repo
     environment:
