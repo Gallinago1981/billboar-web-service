@@ -42,7 +42,7 @@ jobs:
 #      #- run: gradle test
   gen-swagger-ui:
     docker:
-      image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
     environment:
       # Customize the JVM maximum heap limit
@@ -63,8 +63,8 @@ jobs:
           paths: ~/.gradle
           key: v1-dependencies-{{ checksum "billboard-api/build.gradle" }}
   api:
-    machine:
-      image: circleci/openjdk:8-jdk
+    docker:
+      - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
     environment:
       # Customize the JVM maximum heap limit
