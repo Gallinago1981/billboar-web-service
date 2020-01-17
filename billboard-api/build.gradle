@@ -67,8 +67,8 @@ openApiGenerate {
     library = "spring-boot"
     outputDir = "$buildDir"
     packageName = "example.kotlin.billboardapi"
-    apiPackage = "example.kotlin.billboardapi.application.v1.api"
-    modelPackage = "example.kotlin.billboardapi.application.v1.model"
+    apiPackage = "example.kotlin.billboardapi.web.v1.api"
+    modelPackage = "example.kotlin.billboardapi.web.v1.model"
     configOptions = [
             dateLibrary: "java8",
             hideGenerationTimestamp: "ture",

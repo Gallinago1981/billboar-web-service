@@ -1,9 +1,9 @@
-package example.kotlin.billboardapi.application.v1.api
+package example.kotlin.billboardapi.web.v1.api
 
-import example.kotlin.billboardapi.application.v1.api.BillboardApi
-import example.kotlin.billboardapi.application.v1.model.Comment
-import example.kotlin.billboardapi.application.v1.model.Thread
-import example.kotlin.billboardapi.application.v1.model.ThreadList
+import example.kotlin.billboardapi.web.v1.api.BillboardApi
+import example.kotlin.billboardapi.web.v1.model.Comment
+import example.kotlin.billboardapi.web.v1.model.Thread
+import example.kotlin.billboardapi.web.v1.model.ThreadList
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
